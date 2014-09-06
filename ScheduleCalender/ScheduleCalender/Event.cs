@@ -27,10 +27,7 @@ namespace ScheduleCalender
         public string endMin { get; set; }
        
         public string addDate { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-
-        public string emailID { get; set; }
+        public string otherInfo { get; set; }  
         public string backgroundColor { get; set; }
         public string foregroundColor { get; set; }
     }

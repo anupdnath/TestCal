@@ -10,6 +10,7 @@ namespace ScheduleCalender
 {
     public class EventDLL : CommConnection
     {
+        #region [Get Save Event]
         public int InsertEvents(Event oEvent)
         {
             int iRowAffected = 0;
@@ -26,9 +27,7 @@ namespace ScheduleCalender
             cmd.Parameters.AddWithValue("@startMin", SqlDbType.VarChar).Value = oEvent.startMin;
             cmd.Parameters.AddWithValue("@endHour", SqlDbType.VarChar).Value = oEvent.endHour;
             cmd.Parameters.AddWithValue("@endMin", SqlDbType.VarChar).Value = oEvent.endMin;
-            cmd.Parameters.AddWithValue("@firstName", SqlDbType.VarChar).Value =oEvent.firstName;
-            cmd.Parameters.AddWithValue("@lastName", SqlDbType.VarChar).Value = oEvent.lastName;
-            cmd.Parameters.AddWithValue("@emailID", SqlDbType.VarChar).Value = oEvent.emailID;
+            cmd.Parameters.AddWithValue("@OtherInfo", SqlDbType.VarChar).Value = oEvent.otherInfo;
             cmd.Parameters.AddWithValue("@backgroundColor", SqlDbType.VarChar).Value = oEvent.backgroundColor;
             cmd.Parameters.AddWithValue("@foregroundColor", SqlDbType.VarChar).Value = oEvent.foregroundColor;
 
@@ -51,6 +50,9 @@ namespace ScheduleCalender
             return iRowAffected;
 
         }
+        #endregion
+
+        #region [Get Display Event]
         public DataTable GetEvents()
         {
             DataTable dt = new DataTable();
@@ -67,7 +69,9 @@ namespace ScheduleCalender
             }
             return dt;
         }
+        #endregion
 
+        #region [Delete Event]
         public int DelEvents(Int32 eventID)
         {
             int iRowAffected = 0;
@@ -99,5 +103,43 @@ namespace ScheduleCalender
             }
             return iRowAffected;
         }
+        #endregion
+
+        #region [Drag Event]
+        public int DragEvents(Event oEvent)
+        {
+            int iRowAffected = 0;
+            try
+            {
+                cmd = new SqlCommand("Drag_Event", con);
+                cmd.Parameters.AddWithValue("@eventID", SqlDbType.BigInt).Value = oEvent.eventID;
+                cmd.Parameters.AddWithValue("@startYear", SqlDbType.VarChar).Value = oEvent.startYear;
+                cmd.Parameters.AddWithValue("@startMonth", SqlDbType.VarChar).Value = oEvent.startMonth;
+                cmd.Parameters.AddWithValue("@startDay", SqlDbType.VarChar).Value = oEvent.startDay;  
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    con.Open();
+                    iRowAffected = cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception oException)
+                {
+                    throw oException;
+                }
+                finally
+                {
+                    con.Close();
+                    cmd.Dispose();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRowAffected;
+        }
+        #endregion
     }
 }

@@ -12,12 +12,8 @@ namespace ScheduleCalender
 {
     public partial class MyCalender : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        #region [Get Cal Event]
+       
+        #region [Get Display Event]
         
        
         [System.Web.Services.WebMethod]
@@ -49,9 +45,8 @@ namespace ScheduleCalender
                 eve.endHour = dtrow["endHour"].ToString();
                 eve.endMin = dtrow["endMin"].ToString();
 
-                eve.firstName = dtrow["firstName"].ToString();
-                eve.lastName = dtrow["lastName"].ToString();
-                eve.emailID = dtrow["emailID"].ToString();
+                eve.otherInfo = dtrow["otherInfo"].ToString();
+               
                 eve.backgroundColor = dtrow["backgroundColor"].ToString();
                 eve.foregroundColor = dtrow["foregroundColor"].ToString();
                 details.Add(eve);
@@ -89,6 +84,23 @@ namespace ScheduleCalender
             {
                 EventBLL oEventBLL = new EventBLL();
                 r = oEventBLL.DelEvents(evid);
+            }
+            if (r > 0)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
+        #region [Drag and drop]
+         [System.Web.Services.WebMethod]
+        public static bool DragEvent(Event eventdata)
+        {
+            int r = 0;
+            if (eventdata != null)
+            {
+                EventBLL oEventBLL = new EventBLL();
+                r = oEventBLL.DragEvents(eventdata);
             }
             if (r > 0)
                 return true;
