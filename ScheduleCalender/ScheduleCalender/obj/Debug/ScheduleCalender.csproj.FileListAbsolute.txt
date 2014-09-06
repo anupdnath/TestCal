@@ -1,0 +1,5 @@
+E:\Anup\Development\Freelancer\ScheduleCalender\ScheduleCalender\bin\ScheduleCalender.dll
+E:\Anup\Development\Freelancer\ScheduleCalender\ScheduleCalender\bin\ScheduleCalender.pdb
+E:\Anup\Development\Freelancer\ScheduleCalender\ScheduleCalender\obj\Debug\ScheduleCalender.dll
+E:\Anup\Development\Freelancer\ScheduleCalender\ScheduleCalender\obj\Debug\ScheduleCalender.pdb
+E:\Anup\Development\Freelancer\ScheduleCalender\ScheduleCalender\obj\Debug\ScheduleCalender.csprojResolveAssemblyReference.cache
