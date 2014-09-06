@@ -85,54 +85,63 @@ body { font-size: 62.5%; }
                 dragAndDropEnabled: true
             }).data("plugin");
 
+            //Current Month
+            var d = new Date();
+            //alert(myFunction(d.getMonth()));
+            document.getElementById("monthName").innerHTML = myFunction(d.getMonth());
+            //End Current Month
+            DisplayCalData();
             /* Display Event */
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                data: '{}',
-                dataType: "json",
-                type: "POST",
-                url: "MyCalender.aspx/ViewEvents",                                        //the code behind method
-                success: function (data) {                                                  //using the value returned by the code behind in a for loop to print all the existing events from the DB
-                    for (var i = 0; i < data.d.length; i++) {                        
-                        var startYear = data.d[i].startYear.toString();                       	
-                        var startMonth = data.d[i].startMonth.toString();
-                        var startDay = data.d[i].startDay.toString();
-                        var startHour = data.d[i].startHour.toString();
-                        var startMin = data.d[i].startMin.toString();
+            function DisplayCalData() {
+                jfcalplugin.deleteAllAgendaItems("#mycal");
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    data: '{}',
+                    dataType: "json",
+                    type: "POST",
+                    url: "MyCalender.aspx/ViewEvents",                                        //the code behind method
+                    success: function (data) {                                                  //using the value returned by the code behind in a for loop to print all the existing events from the DB
+                        for (var i = 0; i < data.d.length; i++) {
+                            var startYear = data.d[i].startYear.toString();
+                            var startMonth = data.d[i].startMonth.toString();
+                            var startDay = data.d[i].startDay.toString();
+                            var startHour = data.d[i].startHour.toString();
+                            var startMin = data.d[i].startMin.toString();
 
-                        var endYear = data.d[i].endYear.toString();
-                        var endMonth = data.d[i].endMonth.toString();
-                        var endDay = data.d[i].endDay.toString();
-                        var endHour = data.d[i].endHour.toString();
-                        var endMin = data.d[i].endMin.toString();
+                            var endYear = data.d[i].endYear.toString();
+                            var endMonth = data.d[i].endMonth.toString();
+                            var endDay = data.d[i].endDay.toString();
+                            var endHour = data.d[i].endHour.toString();
+                            var endMin = data.d[i].endMin.toString();
 
-                        var startDateObj = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), startHour, startMin, 0, 0);
-                        var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
+                            var startDateObj = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), startHour, startMin, 0, 0);
+                            var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
 
-                        jfcalplugin.addAgendaItem(                  //This is the method that adds the event to the calander. Refer the documentation for more details of this method
-                        "#mycal",                                      //The Div element for my calander
-                        data.d[i].eventName,
-                        startDateObj,
-                        endDateObj,
-                        false,
-                        {
-                            FirstName: data.d[i].firstName.toString(),
-                            LastName: data.d[i].lastName.toString(),
-                            Email: data.d[i].emailID.toString()
-                            //myDate: new Date(),
-                            //ID: data.d[i].eventID
-                        },
-                        {
-                            backgroundColor: data.d[i].backgroundColor.toString(),
-                            foregroundColor: data.d[i].foregroundColor.toString()
+                            jfcalplugin.addAgendaItem(                  //This is the method that adds the event to the calander. Refer the documentation for more details of this method
+                            "#mycal",                                      //The Div element for my calander
+                            data.d[i].eventName,
+                            startDateObj,
+                            endDateObj,
+                            false,
+                            {
+                               // FirstName: data.d[i].firstName.toString(),
+                                //LastName: data.d[i].lastName.toString(),
+                              //  Email: data.d[i].emailID.toString()
+                                //myDate: new Date(),
+                                //ID: data.d[i].eventID
+                            },
+                            {
+                                backgroundColor: data.d[i].backgroundColor.toString(),
+                                foregroundColor: data.d[i].foregroundColor.toString()
+                            }
+                            );
                         }
-                        );
+                    },
+                    error: function (result) {
+                        alert(result.responseText);
                     }
-                },
-                error: function (result) {
-                    alert(result.responseText);
-                }
-            });
+                });
+            };
             //End Display
 
             /**
@@ -311,9 +320,11 @@ body { font-size: 62.5%; }
                 var dtArray = selectedDate.split("-");
                 var year = dtArray[0];
                 // jquery datepicker months start at 1 (1=January)		
-                var month = dtArray[1];
+                var month = dtArray[1];                
                 // strip any preceeding 0's		
                 month = month.replace(/^[0]+/g, "")
+                //alert(myFunction(month-1));
+                document.getElementById("monthName").innerHTML =(myFunction(month - 1));
                 var day = dtArray[2];
                 // plugin uses 0-based months so we subtrac 1
                 jfcalplugin.showMonth("#mycal", year, parseInt(month - 1).toString());
@@ -330,6 +341,8 @@ body { font-size: 62.5%; }
                 // Date month 0-based (0=January)
                 var cmonth = calDate.getMonth();
                 var cday = calDate.getDate();
+                //alert(myFunction(cmonth));
+                document.getElementById("monthName").innerHTML = (myFunction(cmonth));
                 // jquery datepicker month starts at 1 (1=January) so we add 1
                 $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
                 return false;
@@ -346,6 +359,8 @@ body { font-size: 62.5%; }
                 // Date month 0-based (0=January)
                 var cmonth = calDate.getMonth();
                 var cday = calDate.getDate();
+                //alert(myFunction(cmonth));
+                document.getElementById("monthName").innerHTML = (myFunction(cmonth));
                 // jquery datepicker month starts at 1 (1=January) so we add 1
                 $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
                 return false;
@@ -462,6 +477,7 @@ body { font-size: 62.5%; }
                                 url: "MyCalender.aspx/SaveEvent",
                                 dataType: "json",
                                 success: function (data) {
+                                    DisplayCalData();
                                     //var events = new Array();
                                     //$.map(data.d, function (item, i) {
                                     //    var event = new Object();
@@ -473,7 +489,31 @@ body { font-size: 62.5%; }
                                     //    events.push(event);
                                     //})
 
-                                   // $('div[id*=calendar]').fullCalendar('addEventSource', events);
+                                    // Dates use integers
+                                    //var startDateObj = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), startHour, startMin, 0, 0);
+                                    //var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
+
+                                    // add new event to the calendar
+                                    //jfcalplugin.addAgendaItem(
+                                    //    "#mycal",
+                                    //    what,
+                                    //    startDateObj,
+                                    //    endDateObj,
+                                    //    false,
+                                    //    {
+                                    //        fname: "Santa",
+                                    //        lname: "Claus",
+                                    //        leadReindeer: "Rudolph",
+                                    //        myDate: new Date(),
+                                    //        myNum: 42
+                                    //    },
+                                    //    {
+                                    //        backgroundColor: $("#colorBackground").val(),
+                                    //        foregroundColor: $("#colorForeground").val()
+                                    //    }
+                                    //);
+
+                                   
                                     
                                 },
                                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -482,30 +522,6 @@ body { font-size: 62.5%; }
                             });
                             //End
                             //alert("Start time: " + startHour + ":" + startMin + " " + startMeridiem + ", End time: " + endHour + ":" + endMin + " " + endMeridiem);
-
-                            // Dates use integers
-                            var startDateObj = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), startHour, startMin, 0, 0);
-                            var endDateObj = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), endHour, endMin, 0, 0);
-
-                            // add new event to the calendar
-                            jfcalplugin.addAgendaItem(
-                                "#mycal",
-                                what,
-                                startDateObj,
-                                endDateObj,
-                                false,
-                                {
-                                    fname: "Santa",
-                                    lname: "Claus",
-                                    leadReindeer: "Rudolph",
-                                    myDate: new Date(),
-                                    myNum: 42
-                                },
-                                {
-                                    backgroundColor: $("#colorBackground").val(),
-                                    foregroundColor: $("#colorForeground").val()
-                                }
-                            );
 
                             $(this).dialog('close');
 
@@ -614,6 +630,23 @@ body { font-size: 62.5%; }
                             if (clickAgendaItem != null) {
                                 jfcalplugin.deleteAgendaItemById("#mycal", clickAgendaItem.agendaId);
                                 //jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
+
+                                //Start Database Delete
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    data: "{evid:" + JSON.stringify(clickAgendaItem.agendaId) + "}",
+                                    url: "MyCalender.aspx/DelEvent",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        DisplayCalData();
+
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        debugger;
+                                    }
+                                });
+                                //End Database Delete
                             }
                             $(this).dialog('close');
                         }
@@ -627,6 +660,10 @@ body { font-size: 62.5%; }
                         var allDay = clickAgendaItem.allDay;
                         var data = clickAgendaItem.data;
                         // in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
+                        var startDate = new Date(startDate + " UTC");
+                        startDate = startDate.toString().replace(/GMT.*/g, "");
+                        var endDate = new Date(endDate + " UTC");
+                        endDate = endDate.toString().replace(/GMT.*/g, "");
                         $("#display-event-form").append(
                             "<br><b>" + title + "</b><br><br>"
                         );
@@ -636,7 +673,7 @@ body { font-size: 62.5%; }
                             );
                         } else {
                             $("#display-event-form").append(
-                                "<b>Starts:</b> " + startDate + "<br>" +
+                                "<b>Test Starts:</b> " + startDate + "<br>" +
                                 "<b>Ends:</b> " + endDate + "<br><br>"
                             );
                         }
@@ -665,6 +702,26 @@ body { font-size: 62.5%; }
                 }
             });
 
+            //Month Name
+            function myFunction(monthName) {
+                var month = new Array();
+                month[0] = "January";
+                month[1] = "February";
+                month[2] = "March";
+                month[3] = "April";
+                month[4] = "May";
+                month[5] = "June";
+                month[6] = "July";
+                month[7] = "August";
+                month[8] = "September";
+                month[9] = "October";
+                month[10] = "November";
+                month[11] = "December";
+               
+                var n = month[monthName];
+                return n;
+            }
+            //End Month Name
         });
 </script>
     <form id="form1" runat="server">
@@ -673,15 +730,18 @@ body { font-size: 62.5%; }
 		<div id="example" style="margin: auto; width:80%;">
 	
 
-		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-			<button id="BtnPreviousMonth">Previous Month</button>
-			<button id="BtnNextMonth">Next Month</button>
+		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle;  overflow: hidden;width:100%">
+			<button id="BtnPreviousMonth">Previous Month</button>			
 			&nbsp;&nbsp;&nbsp;
-			Date: <input type="text" id="dateSelect" size="20"/>
-			&nbsp;&nbsp;&nbsp;
-			<button id="BtnDeleteAll">Delete All</button>
+			Go To Date: <input type="text" id="dateSelect" size="20"/>
+            <div id="monthName" style="display: inline;left: 50%;margin: 170px; font-size: 24px;">Sample Text inside a </div>
+			
+			<%--<button id="BtnDeleteAll">Delete All</button>--%>
 			<%--<button id="BtnICalTest">iCal Test</button>
 			<input type="text" id="iCalSource" size="30" value="extra/fifa-world-cup-2010.ics"/>--%>
+          
+            <button style="float:right" id="BtnNextMonth">Next Month</button>
+           
 		</div>
 
 		<br>

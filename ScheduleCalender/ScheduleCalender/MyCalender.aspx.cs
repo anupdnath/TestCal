@@ -78,5 +78,23 @@ namespace ScheduleCalender
                 return false;
         }
         #endregion
+
+        #region [Event Delete]
+
+        [System.Web.Services.WebMethod]
+        public static bool DelEvent(Int32 evid)
+        {
+            int r = 0;
+            if (evid != null)
+            {
+                EventBLL oEventBLL = new EventBLL();
+                r = oEventBLL.DelEvents(evid);
+            }
+            if (r > 0)
+                return true;
+            else
+                return false;
+        }
+        #endregion
     }
 }

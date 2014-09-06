@@ -57,15 +57,47 @@ namespace ScheduleCalender
             try
             {
                 adp = new SqlDataAdapter("SP_GET_EVENTs", con);
-                adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-                
+                adp.SelectCommand.CommandType = CommandType.StoredProcedure;                
                 adp.Fill(dt);
                 
             }
             catch (Exception ex)
             {
+                throw ex;
             }
             return dt;
+        }
+
+        public int DelEvents(Int32 eventID)
+        {
+            int iRowAffected = 0;
+            try
+            {
+                cmd = new SqlCommand("Del_Event", con);
+                cmd.Parameters.AddWithValue("@eventID", SqlDbType.BigInt).Value = eventID; 
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    con.Open();
+                    iRowAffected = cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception oException)
+                {
+                    throw oException;
+                }
+                finally
+                {
+                    con.Close();
+                    cmd.Dispose();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRowAffected;
         }
     }
 }

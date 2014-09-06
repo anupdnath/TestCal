@@ -19,5 +19,11 @@ namespace ScheduleCalender
             EventDLL oEventDLL = new EventDLL();
             return oEventDLL.GetEvents();
         }
+
+        public int DelEvents( Int32 eventID)
+        {
+            EventDLL oEventDLL = new EventDLL();
+            return oEventDLL.DelEvents(eventID);
+        }
     }
 }
