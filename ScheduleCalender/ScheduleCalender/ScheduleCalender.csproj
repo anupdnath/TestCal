@@ -146,6 +146,7 @@
     <Compile Include="App_Code\CommConnection.cs" />
     <Compile Include="App_Code\EventBLL.cs" />
     <Compile Include="Entity\Event.cs" />
+    <Compile Include="Entity\FileData.cs" />
     <Compile Include="FileUpload.aspx.cs">
       <DependentUpon>FileUpload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

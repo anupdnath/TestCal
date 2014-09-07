@@ -108,5 +108,50 @@ namespace ScheduleCalender
                 return false;
         }
         #endregion
+
+        #region [PopUp Details Display]
+        [System.Web.Services.WebMethod]
+        public static Event[] ViewDetails(int evid)
+        {
+            DataTable dt = new DataTable();
+            List<Event> details = new List<Event>();
+
+            EventBLL oEventBLL = new EventBLL();
+            dt = oEventBLL.GetEventDetails(evid);
+
+            foreach (DataRow dtrow in dt.Rows)
+            {
+                Event eve = new Event();
+                eve.eventID = Int32.Parse(dtrow["eventID"].ToString());
+                eve.otherInfo = dtrow["otherInfo"].ToString();  
+                eve.backgroundColor = dtrow["backgroundColor"].ToString();
+                details.Add(eve);
+            }
+
+            return details.ToArray();
+        }
+        #endregion
+
+        #region [ToolTip Display]
+        [System.Web.Services.WebMethod]
+        public static Event[] ViewToolTips(int evid)
+        {
+            DataTable dt = new DataTable();
+            List<Event> details = new List<Event>();
+
+            EventBLL oEventBLL = new EventBLL();
+            dt = oEventBLL.GetEventDetails(evid);
+
+            foreach (DataRow dtrow in dt.Rows)
+            {
+                Event eve = new Event();
+                eve.eventID = Int32.Parse(dtrow["eventID"].ToString());
+                eve.otherInfo = dtrow["otherInfo"].ToString();               
+                details.Add(eve);
+            }
+
+            return details.ToArray();
+        }
+        #endregion
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ScheduleCalender
 {
-    public class Event
+    public class Event : FileData
     {
         public int? eventID { get; set; }
         public string eventName { get; set; }

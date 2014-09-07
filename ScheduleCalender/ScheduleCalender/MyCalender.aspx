@@ -41,7 +41,7 @@ Include JQuery Core (Required for calendar plugin)
 <script type="text/javascript" src="js/Custom/CustomeCall.js"></script>
 
 </head>
-<body style="background-color: #ffffff;">
+<body style="background-color: #ffffff;width:100%;height: auto;">
     <style type="text/css" media="screen">
 /*
 Default font-size on the default ThemeRoller theme is set in ems, and with a value that when combined 
@@ -64,12 +64,12 @@ body { font-size: 62.5%; }
 
     
     <form id="form1" runat="server">
-   	<div id="tabs-2">
+   	<div  style="width:100%;min-width: 500px;min-height: 400px;display: block;align-items:center;margin: 10px 10px 10px 10px;">
 
 		<div id="example" style="margin: auto; width:80%;">
 	
 
-		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle;  overflow: hidden;width:100%">
+		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle;  overflow: hidden;width:90%">
 			<button id="BtnPreviousMonth">Previous Month</button>			
 			&nbsp;&nbsp;&nbsp;
 			Go To Date: <input type="text" id="dateSelect" size="20"/>
@@ -91,12 +91,12 @@ body { font-size: 62.5%; }
 		Height will be calculated by aspect ratio. Basically all day cells will be as tall
 		as they are wide.
 		-->
-		<div id="mycal"></div>
+		<div id="mycal" style="width:90%;height:60%"></div>
 
 		</div>
 
 		<!-- debugging-->
-		<div id="calDebug"></div>
+		<%--<div id="calDebug"></div>--%>
 
 		<!-- Add event modal form -->
 		<style type="text/css">
@@ -105,7 +105,7 @@ body { font-size: 62.5%; }
 			.ui-dialog .ui-state-error { padding: .3em; }
 			.validateTips { border: 1px solid transparent; padding: 0.3em; }
 		</style>
-		<div id="add-event-form" title="Add New Event">
+		<%--<div id="add-event-form" title="Add New Event">
 			<p class="validateTips">All form fields are required.</p>
 			<form>
 			<fieldset>
@@ -220,13 +220,13 @@ body { font-size: 62.5%; }
 				</table>
 			</fieldset>
 			</form>
-		</div>
+		</div>--%>
 		
 		<div id="display-event-form" title="View Agenda Item">
 			
 		</div>		
 
-		<p>&nbsp;</p>
+		
 
 	</div>
     </form>

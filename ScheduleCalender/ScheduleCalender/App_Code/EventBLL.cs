@@ -39,5 +39,21 @@ namespace ScheduleCalender
             return oEventDLL.DragEvents(oEvent);
         }
         #endregion
+
+        #region [Get Display Details Event]
+        public DataTable GetEventDetails(int evID)
+        {
+            EventDLL oEventDLL = new EventDLL();
+            return oEventDLL.GetEventDetails(evID);
+        }
+        #endregion
+
+         #region [Save File]
+        public int InsertFile(Event oEvent)
+        {
+            EventDLL oEventDLL = new EventDLL();
+            return oEventDLL.InsertFile(oEvent);
+        }
+         #endregion
     }
 }
