@@ -57,7 +57,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="calendar.html" />
     <Content Include="css\colorpicker\colorpicker.css" />
     <Content Include="css\colorpicker\images\blank.gif" />
     <Content Include="css\colorpicker\images\colorpicker_background.png" />
@@ -146,7 +145,7 @@
     <Compile Include="App_Code\EventDLL.cs" />
     <Compile Include="App_Code\CommConnection.cs" />
     <Compile Include="App_Code\EventBLL.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="Entity\Event.cs" />
     <Compile Include="FileUpload.aspx.cs">
       <DependentUpon>FileUpload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,6 +161,7 @@
       <DependentUpon>MyCalender.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ImportUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\jquery-qtip-1.0.0-rc3140944\INSTALL" />
@@ -174,7 +174,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Temp\FileUpload\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

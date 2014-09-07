@@ -73,7 +73,8 @@ body { font-size: 62.5%; }
 			<button id="BtnPreviousMonth">Previous Month</button>			
 			&nbsp;&nbsp;&nbsp;
 			Go To Date: <input type="text" id="dateSelect" size="20"/>
-            <div id="monthName" style="display: inline;left: 50%;margin: 170px; font-size: 24px;">Sample Text inside a </div>
+            <a href="FileUpload.aspx" title="Upload CSV">Upload CSV</a>
+            <div id="monthName" style="display: inline;left: 50%;margin: 100px; font-size: 24px;"> </div>
 			
 			<%--<button id="BtnDeleteAll">Delete All</button>--%>
 			<%--<button id="BtnICalTest">iCal Test</button>
